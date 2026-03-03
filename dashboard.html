@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="{{ url_for('index') }}">
+        <img src="{{ url_for('static', filename='logo.svg') }}" alt="Logo" class="logo">
+        <span>Dashboard</span>
+      </a>
+      <nav>
+        <a class="btn" href="{{ url_for('logout') }}">Keluar</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="container">
+      <div class="card form">
+        <h1>Unggah File</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flash">
+              {% for category, message in messages %}
+                <div class="flash-item {{ category }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+          <input type="file" name="file" required>
+          <button class="btn primary" type="submit">Unggah</button>
+        </form>
+      </div>
+      <div class="grid">
+        {% for p in posts %}
+          <div class="card media-card">
+            <div class="media-wrap">
+              {% if p.mime_type.startswith('image/') %}
+                <img src="{{ url_for('media', fname=p.filename) }}" alt="{{ p.original_name }}">
+              {% elif p.mime_type.startswith('video/') %}
+                <video src="{{ url_for('media', fname=p.filename) }}" controls preload="metadata"></video>
+              {% else %}
+                <a class="file-link" href="{{ url_for('media', fname=p.filename) }}" target="_blank">{{ p.original_name }}</a>
+              {% endif %}
+            </div>
+            <div class="media-meta">
+              <div class="name">{{ p.original_name }}</div>
+              <div class="actions">
+                <a class="btn" href="{{ url_for('media', fname=p.filename) }}" target="_blank">Buka</a>
+                <a class="btn danger" href="{{ url_for('delete_post', post_id=p.id) }}">Hapus</a>
+              </div>
+            </div>
+          </div>
+        {% else %}
+          <p>Tidak ada file.</p>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {{ 2026 }} Boas Sababang</p>
+    </div>
+  </footer>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

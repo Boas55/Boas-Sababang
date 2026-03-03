@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boas Sababang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="{{ url_for('index') }}">
+        <img src="{{ url_for('static', filename='logo.svg') }}" alt="Logo" class="logo">
+        <span>Boas Sababang</span>
+      </a>
+      <nav>
+        <a class="btn" href="{{ url_for('login') }}">Masuk</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h1>Website Pribadi</h1>
+          <p>Selamat datang di ruang digital Boas Sababang. Terhubung lewat media sosial dan kontak di bawah.</p>
+          <div class="socials">
+            <a class="social" href="https://www.facebook.com/search/top/?q=Boas%20Sababang" target="_blank" rel="noopener">Facebook</a>
+            <a class="social" href="https://www.instagram.com/bsababang" target="_blank" rel="noopener">Instagram</a>
+            <a class="social" href="https://wa.me/082389488187" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="social" href="mailto:vivoxboas@gmail.com">Email</a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="card">
+            <img src="{{ url_for('static', filename='logo.svg') }}" alt="Logo" class="logo-large">
+            <div class="glow"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="cta">
+      <div class="container cta-inner">
+        <h2>Area Privat</h2>
+        <p>Unggah foto, video, dan file yang hanya bisa diakses oleh Anda.</p>
+        <a class="btn primary" href="{{ url_for('login') }}">Masuk ke Dashboard</a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {{ 2026 }} Boas Sababang</p>
+    </div>
+  </footer>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
